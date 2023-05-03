@@ -20,21 +20,21 @@ function SimpleLine({ data, type }: Props) {
 	return (
 		<ResponsiveLine
 			data={formatData(data, type)}
-			margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+			margin={{ top: 50, right: 50, bottom: 30, left: 50 }}
 			xScale={{ type: "time", format: "%Y-%m-%d" }}
 			yScale={{
 				type: "linear",
-				min: "auto",
+				min: 0,
 				max: "auto",
 				reverse: false,
 			}}
-			curve="natural"
+			curve="cardinal"
 			colors={{ scheme: "set1" }}
 			axisTop={null}
 			axisRight={null}
 			axisBottom={{
 				format: "%b %Y",
-				tickValues: "every month",
+				tickValues: "every 4 weeks",
 				tickRotation: 0,
 				tickSize: 5,
 				tickPadding: 5,
@@ -48,8 +48,9 @@ function SimpleLine({ data, type }: Props) {
 			enableGridX={false}
 			enablePoints={false}
 			enableArea={true}
-			areaOpacity={0.4}
+			areaOpacity={0.5}
 			useMesh={true}
+			crosshairType="cross"
 			xFormat="time:%Y-%m-%d"
 		/>
 	)

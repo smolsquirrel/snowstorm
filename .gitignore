@@ -1,0 +1,5 @@
+test.ipynb
+.vscode/
+__pycache__/
+venv/
+.env

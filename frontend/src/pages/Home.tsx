@@ -15,15 +15,9 @@ import Calendar from "../components/Calendar"
 import HomeStats from "../components/HomeStats"
 import SimpleLine from "../components/SimpleLine"
 import TransactionsTable from "../components/TransactionsTable"
+import { DailyStats } from "../interfaces/DailyStats"
 
 const api_url = import.meta.env.VITE_API_URL
-
-interface DailyStats {
-	DATE: string
-	SWAPS: number
-	USERS: number
-	VOLUME: number
-}
 
 const selectStat = (type: keyof DailyStats, data: Array<DailyStats>) => {
 	const calendarData = []
@@ -45,6 +39,7 @@ const selectStat = (type: keyof DailyStats, data: Array<DailyStats>) => {
 }
 
 const applyDateRange = (range: number[], lineData: Array<any>) => {
+	if (lineData.length == 0) return []
 	const start = Math.floor((range[0] / 100) * lineData.length)
 	const end = Math.floor((range[1] / 100) * lineData.length)
 	return lineData.slice(start, end)
@@ -85,7 +80,6 @@ function Home() {
 	}
 
 	const handleVis = (event: React.MouseEvent<HTMLElement>, newVis: string) => {
-		console.log(newVis)
 		setVisType(newVis)
 	}
 
@@ -137,7 +131,7 @@ function Home() {
 			<Grid item>
 				{visType === "CHART" ? (
 					<Box component={Paper}>
-						<Grid container direction="column" spacing={2}>
+						<Grid container direction="column" spacing={1}>
 							<Grid item sx={{ height: "50vh" }}>
 								<SimpleLine
 									data={applyDateRange(range, lineData)}

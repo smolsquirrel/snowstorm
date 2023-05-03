@@ -5,7 +5,6 @@ interface Props {
 }
 
 function Calendar({ data }: Props) {
-	console.log(data)
 	return (
 		<ResponsiveCalendar
 			data={data}
