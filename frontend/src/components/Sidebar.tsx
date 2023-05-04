@@ -12,7 +12,7 @@ import ListItemIcon from "@mui/material/ListItemIcon"
 import ListItemText from "@mui/material/ListItemText"
 import Typography from "@mui/material/Typography"
 
-const drawerWidth = 220
+const drawerWidth = 210
 function Sidebar() {
 	return (
 		<Drawer
