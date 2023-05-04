@@ -43,12 +43,12 @@ function Pie({ data, statType, interval }: Props) {
 					translateX: 0,
 					translateY: 30,
 					itemsSpacing: 0,
-					itemWidth: 60,
+					itemWidth: 65,
 					itemHeight: 0,
 					itemTextColor: "#999",
 					itemDirection: "top-to-bottom",
 					itemOpacity: 1,
-					symbolSize: 18,
+					symbolSize: 5,
 					symbolShape: "circle",
 					effects: [
 						{
