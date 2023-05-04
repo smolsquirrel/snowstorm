@@ -9,6 +9,7 @@ import About from "./pages/About"
 import Assets from "./pages/Assets"
 import Home from "./pages/Home"
 import Platforms from "./pages/Platforms"
+import Pools from "./pages/Pools"
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				<Route path="/" element={<Home />} />
 				<Route path="/platforms" element={<Platforms />} />
 				<Route path="/assets" element={<Assets />} />
+				<Route path="/pools" element={<Pools />} />
 				<Route path="/about" element={<About />} />
 			</Routes>
 		</Box>
