@@ -39,21 +39,21 @@ function TransactionsTable({ data }: Props) {
 				</TableHead>
 				<TableBody>
 					{data.map((tx) => (
-						<TableRow key={tx.tx_hash + tx.amount_in + tx.amount_out}>
-							<TableCell>{formatDate(tx.date)}</TableCell>
-							<TableCell>{tx.platform}</TableCell>
-							<TableCell>{tx.symbol_in}</TableCell>
-							<TableCell>{tx.amount_in}</TableCell>
-							<TableCell>{tx.symbol_out}</TableCell>
-							<TableCell>{tx.amount_out}</TableCell>
-							<TableCell>{tx.user.slice(0, 5) + "..." + tx.user.slice(37)}</TableCell>
+						<TableRow key={tx.TX_HASH + tx.AMOUNT_IN + tx.AMOUNT_OUT}>
+							<TableCell>{formatDate(tx.DATE)}</TableCell>
+							<TableCell>{tx.PLATFORM}</TableCell>
+							<TableCell>{tx.SYMBOL_IN}</TableCell>
+							<TableCell>{tx.AMOUNT_IN}</TableCell>
+							<TableCell>{tx.SYMBOL_OUT}</TableCell>
+							<TableCell>{tx.AMOUNT_OUT}</TableCell>
+							<TableCell>{tx.USER.slice(0, 5) + "..." + tx.USER.slice(37)}</TableCell>
 							<TableCell>
 								<Link
-									href={"https://snowtrace.io/tx/" + tx.tx_hash}
+									href={"https://snowtrace.io/tx/" + tx.TX_HASH}
 									target="_blank"
 									rel="noreferrer"
 								>
-									{tx.tx_hash.slice(0, 5)}
+									{tx.TX_HASH.slice(0, 5)}
 								</Link>
 							</TableCell>
 						</TableRow>
