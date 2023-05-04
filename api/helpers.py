@@ -61,12 +61,12 @@ def formatBumpChart(data, interval, key):
     return lineData
 
 
-def platformUserOverlap(data):
+def userOverlap(data, key):
     platforms = {}
     for x in data:
-        if x["PLATFORM"] not in platforms:
-            platforms[x["PLATFORM"]] = set()
-        platforms[x["PLATFORM"]].add(x["USER"])
+        if x[key] not in platforms:
+            platforms[x[key]] = set()
+        platforms[x[key]].add(x["USER"])
 
     platform_names = list(platforms.keys())
     overlap = []
@@ -106,7 +106,7 @@ def platformPie(data):
     return pie
 
 
-def assetPie(data):
+def pie(data, key):
     pie = {}
     intervals = ["all_time", "thirty", "seven"]
     stats = ["SWAPS", "USERS", "VOLUME"]
@@ -122,8 +122,8 @@ def assetPie(data):
             for x in d:
                 pie[interval][stat].append(
                     {
-                        "id": x["ASSET"],
-                        "label": x["ASSET"],
+                        "id": x[key],
+                        "label": x[key],
                         "value": x[stat],
                     }
                 )
@@ -155,10 +155,10 @@ def assetChord(data):
     return {"labels": assets, "data": flows}
 
 
-def assetHeatMap(data):
+def heatMap(data, key):
     chart = {}
     for x in data:
         if x["PLATFORM"] not in chart:
             chart[x["PLATFORM"]] = {"id": x["PLATFORM"], "data": []}
-        chart[x["PLATFORM"]]["data"].append({"x": x["ASSET"], "y": x["CHANGE"]})
+        chart[x["PLATFORM"]]["data"].append({"x": x[key], "y": x["CHANGE"]})
     return list(chart.values())
