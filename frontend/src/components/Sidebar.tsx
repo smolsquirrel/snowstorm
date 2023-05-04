@@ -84,6 +84,11 @@ function Sidebar() {
 						<ListItemText>About</ListItemText>
 					</ListItemButton>
 				</ListItem>
+				<ListItem disablePadding sx={{ color: "white" }}>
+					<ListItemButton>
+						<ListItemText>Data from Flipside</ListItemText>
+					</ListItemButton>
+				</ListItem>
 			</List>
 		</Drawer>
 	)
