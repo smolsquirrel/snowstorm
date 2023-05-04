@@ -91,11 +91,11 @@ function Assets() {
 		setSelectedBump(bump[interval][statType])
 	}, [statType, interval])
 
-	const handleStat = (event: React.MouseEvent<HTMLElement>, newStat: string) => {
+	const handleStat = (_event: React.MouseEvent<HTMLElement>, newStat: string) => {
 		setStatType(newStat as keyof DailyStats)
 	}
 
-	const handleInterval = (event: React.MouseEvent<HTMLElement>, newInterval: string) => {
+	const handleInterval = (_event: React.MouseEvent<HTMLElement>, newInterval: string) => {
 		setInterval(newInterval)
 	}
 
