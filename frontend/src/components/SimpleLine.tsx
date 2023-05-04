@@ -52,6 +52,7 @@ function SimpleLine({ data, type }: Props) {
 			useMesh={true}
 			crosshairType="cross"
 			xFormat="time:%Y-%m-%d"
+			yFormat=">-.2f"
 		/>
 	)
 }

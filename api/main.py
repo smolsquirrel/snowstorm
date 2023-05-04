@@ -180,6 +180,19 @@ async def asset_heat_map():
     return {"data": helpers.assetHeatMap(r.json())}
 
 
+# Asset daily stable percent
+@app.get("/asset/stable_line")
+async def asset_stable_line():
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/63520921-f8f1-4037-9a12-6cf7d0e6d44b/data/latest"
+    )
+    data = r.json()
+    d = []
+    for x in data:
+        d.append({"x": x["DATE"][:10], "y": x["STABLE_PERCENT"]})
+    return {"data": d}
+
+
 @app.get("/")
 async def root():
     return {}

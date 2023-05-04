@@ -4,6 +4,7 @@ import InfoIcon from "@mui/icons-material/Info"
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import Paper from "@mui/material/Paper"
+import Slider from "@mui/material/Slider"
 import Tooltip from "@mui/material/Tooltip"
 import Typography from "@mui/material/Typography"
 
@@ -13,6 +14,7 @@ import HeatMap from "../components/HeatMap"
 import MultiLine from "../components/MultiLine"
 import OptionsBar from "../components/OptionsBar"
 import Pie from "../components/Pie"
+import SimpleLine from "../components/SimpleLine"
 import { DailyStats } from "../interfaces/DailyStats"
 
 const api_url = import.meta.env.VITE_API_URL
@@ -32,9 +34,17 @@ interface LineChartDataPoint {
 	y: number
 }
 
+const applyDateRange = (range: number[], lineData: Array<any>) => {
+	if (lineData.length == 0) return []
+	const start = Math.floor((range[0] / 100) * lineData.length)
+	const end = Math.floor((range[1] / 100) * lineData.length)
+	return lineData.slice(start, end)
+}
+
 function Assets() {
 	const [statType, setStatType] = useState("VOLUME" as keyof DailyStats)
 	const [data, setData] = useState<Data>({ thirty: { VOLUME: [] } })
+	const [stable, setStable] = useState<{ x: string; y: number }[]>([])
 	const [bump, setBump] = useState<Data>({ thirty: { VOLUME: [] } })
 	const [chord, setChord] = useState<{ labels: string[]; data: number[][] }>({
 		labels: [],
@@ -61,6 +71,7 @@ function Assets() {
 		},
 	])
 	const [interval, setInterval] = useState("thirty")
+	const [range, setRange] = useState([0, 100])
 
 	useEffect(() => {
 		fetch(api_url + "/asset/daily_line")
@@ -91,6 +102,11 @@ function Assets() {
 			.then((d) => {
 				setHeat(d["data"])
 			})
+		fetch(api_url + "/asset/stable_line")
+			.then((r) => r.json())
+			.then((d) => {
+				setStable(d["data"])
+			})
 	}, [])
 
 	useEffect(() => {
@@ -104,6 +120,10 @@ function Assets() {
 
 	const handleInterval = (_event: React.MouseEvent<HTMLElement>, newInterval: string) => {
 		setInterval(newInterval)
+	}
+
+	const handleRange = (_event: Event, newValue: number | number[]) => {
+		setRange(newValue as number[])
 	}
 
 	return (
@@ -217,6 +237,34 @@ function Assets() {
 					<Box component={Paper} sx={{ height: "60vh" }}>
 						<HeatMap data={heat} />
 					</Box>
+				</Grid>
+				<Grid item container direction="column">
+					<Grid item>
+						<Box
+							component={Paper}
+							display="flex"
+							justifyContent="space-between"
+							p={2.4}
+							sx={{ borderTop: 10, borderColor: "#ee5253" }}
+						>
+							<Typography variant="h4">Percentage of Stablecoin Volume</Typography>
+						</Box>
+					</Grid>
+					<Grid item>
+						<Box component={Paper} sx={{ height: "50vh" }}>
+							<SimpleLine
+								data={applyDateRange(range, stable)}
+								type="Stable Percent"
+							/>
+						</Box>
+					</Grid>
+					<Grid item>
+						<Slider
+							value={range}
+							onChange={handleRange}
+							sx={{ color: "#ee5253", maxWidth: "95%" }}
+						/>
+					</Grid>
 				</Grid>
 			</Grid>
 		</Grid>
