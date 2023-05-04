@@ -75,15 +75,15 @@ function Home() {
 		setLineData(data["lineData"])
 	}, [daily, statType])
 
-	const handleStat = (event: React.MouseEvent<HTMLElement>, newStat: string) => {
+	const handleStat = (_event: React.MouseEvent<HTMLElement>, newStat: string) => {
 		setStatType(newStat as keyof DailyStats)
 	}
 
-	const handleVis = (event: React.MouseEvent<HTMLElement>, newVis: string) => {
+	const handleVis = (_event: React.MouseEvent<HTMLElement>, newVis: string) => {
 		setVisType(newVis)
 	}
 
-	const handleRange = (event: Event, newValue: number | number[]) => {
+	const handleRange = (_event: Event, newValue: number | number[]) => {
 		setRange(newValue as number[])
 	}
 
