@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import query_manager
 import requests
 import requests
 import helpers
@@ -37,12 +36,13 @@ async def general_daily_stats():
 
 @app.get("/general/recent_transactions")
 async def general_recent_transactions():
-    return {"data": query_manager.gen_recent_txs()}
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/9616e9ff-cd51-4f65-8aa4-32a916ec52f9/data/latest"
+    )
+    return {"data": r.json()}
 
 
 # Platform
-
-
 # Platform general stats
 @app.get("/platform/interval_stats")
 async def platform_interval_stats():
@@ -98,7 +98,7 @@ async def platform_overlap():
     r = requests.get(
         "https://api.flipsidecrypto.com/api/v2/queries/8bbb10b6-c512-485d-b9e5-99321c7426a8/data/latest"
     )
-    return {"data": helpers.platformUserOverlap(r.json())}
+    return {"data": helpers.userOverlap(r.json(), "PLATFORM")}
 
 
 # Platform general stats
@@ -155,11 +155,11 @@ async def asset_daily_bump():
 
 # Asset general stats
 @app.get("/asset/pie")
-async def platform_pie():
+async def pool_pie():
     r = requests.get(
         "https://api.flipsidecrypto.com/api/v2/queries/807a5e50-3cb1-41f4-871b-f892f576851f/data/latest"
     )
-    return helpers.assetPie(r.json())
+    return helpers.pie(r.json(), "ASSET")
 
 
 # Asset flows
@@ -177,7 +177,7 @@ async def asset_heat_map():
     r = requests.get(
         "https://api.flipsidecrypto.com/api/v2/queries/445117ed-fc2d-4f85-a5d5-bb5097ca94d8/data/latest"
     )
-    return {"data": helpers.assetHeatMap(r.json())}
+    return {"data": helpers.heatMap(r.json(), "ASSET")}
 
 
 # Asset daily stable percent
@@ -190,6 +190,89 @@ async def asset_stable_line():
     d = []
     for x in data:
         d.append({"x": x["DATE"][:10], "y": x["STABLE_PERCENT"]})
+    return {"data": d}
+
+
+# Pools
+
+
+# Pool daily all time
+# Pool daily 30D
+# Pool daily 7D
+@app.get("/pool/daily_line")
+async def pool_daily_line():
+    r1 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/bd8b00e6-a161-401e-8657-64942b6cae37/data/latest"
+    ).json()
+    r2 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/15ef8139-8f33-40ab-8a5d-7a64a5c84ba8/data/latest"
+    ).json()
+    r3 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/7d23b74a-b604-4a45-83fb-c8d7d19df566/data/latest"
+    ).json()
+    all_time = helpers.formatLineChart(r1, "POOL")
+    thirty = helpers.formatLineChart(r2, "POOL")
+    seven = helpers.formatLineChart(r3, "POOL")
+    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+
+
+# Pool daily all time
+# Pool daily 30D
+# Pool daily 7D
+@app.get("/pool/daily_bump")
+async def pool_daily_bump():
+    r1 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/bd8b00e6-a161-401e-8657-64942b6cae37/data/latest"
+    ).json()
+    r2 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/15ef8139-8f33-40ab-8a5d-7a64a5c84ba8/data/latest"
+    ).json()
+    r3 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/7d23b74a-b604-4a45-83fb-c8d7d19df566/data/latest"
+    ).json()
+    all_time = helpers.formatBumpChart(r1, 60, "POOL")
+    thirty = helpers.formatBumpChart(r2, 3, "POOL")
+    seven = helpers.formatBumpChart(r3, 1, "POOL")
+    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+
+
+# Pool general stats
+@app.get("/pool/pie")
+async def pool_pie():
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/f8712fb7-d309-47d7-96ba-7874ce15f86a/data/latest"
+    )
+    return helpers.pie(r.json(), "POOL")
+
+
+# Pool users 7D
+@app.get("/pool/overlap")
+async def pool_overlap():
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/923650e4-d49c-4640-9be7-3c4dbe01b325/data/latest"
+    )
+    return {"data": helpers.userOverlap(r.json(), "POOL")}
+
+
+# Pool top gainers weekly
+@app.get("/pool/heat_map")
+async def pool_heat_map():
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/b5c70582-0960-4829-93ca-c6f53d45d533/data/latest"
+    )
+    return {"data": helpers.heatMap(r.json(), "POOL")}
+
+
+# Asset daily stable percent
+@app.get("/pool/wavax_line")
+async def pool_wavax_line():
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/5b0f49f6-bb0d-4fba-81ea-0602404025d2/data/latest"
+    )
+    data = r.json()
+    d = []
+    for x in data:
+        d.append({"x": x["DATE"][:10], "y": x["WAVAX_PERCENT"]})
     return {"data": d}
 
 
