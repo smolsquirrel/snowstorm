@@ -238,33 +238,30 @@ function Assets() {
 						<HeatMap data={heat} />
 					</Box>
 				</Grid>
-				<Grid item container direction="column">
-					<Grid item>
-						<Box
-							component={Paper}
-							display="flex"
-							justifyContent="space-between"
-							p={2.4}
-							sx={{ borderTop: 10, borderColor: "#ee5253" }}
-						>
-							<Typography variant="h4">Stablecoin Volume Percentage</Typography>
-						</Box>
-					</Grid>
-					<Grid item>
-						<Box component={Paper} sx={{ height: "50vh" }}>
-							<SimpleLine
-								data={applyDateRange(range, stable)}
-								type="Stable Percent"
-							/>
-						</Box>
-					</Grid>
-					<Grid item>
-						<Slider
-							value={range}
-							onChange={handleRange}
-							sx={{ color: "#ee5253", maxWidth: "95%" }}
-						/>
-					</Grid>
+			</Grid>
+			<Grid item container direction="column">
+				<Grid item>
+					<Box
+						component={Paper}
+						display="flex"
+						justifyContent="space-between"
+						p={2.4}
+						sx={{ borderTop: 10, borderColor: "#ee5253" }}
+					>
+						<Typography variant="h4">Stablecoin Volume Percentage</Typography>
+					</Box>
+				</Grid>
+				<Grid item>
+					<Box component={Paper} sx={{ height: "50vh" }}>
+						<SimpleLine data={applyDateRange(range, stable)} type="Stable Percent" />
+					</Box>
+				</Grid>
+				<Grid item>
+					<Slider
+						value={range}
+						onChange={handleRange}
+						sx={{ color: "#ee5253", maxWidth: "95%" }}
+					/>
 				</Grid>
 			</Grid>
 		</Grid>
