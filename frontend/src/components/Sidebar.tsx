@@ -1,5 +1,6 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 import HomeIcon from "@mui/icons-material/Home"
+import InfoIcon from "@mui/icons-material/Info"
 import InventoryIcon from "@mui/icons-material/Inventory"
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn"
 import StoreIcon from "@mui/icons-material/Store"
@@ -73,6 +74,14 @@ function Sidebar() {
 							<AccountCircleIcon sx={{ color: "white" }} />
 						</ListItemIcon>
 						<ListItemText>Account</ListItemText>
+					</ListItemButton>
+				</ListItem>
+				<ListItem disablePadding sx={{ color: "white" }}>
+					<ListItemButton href="/about">
+						<ListItemIcon>
+							<InfoIcon sx={{ color: "white" }} />
+						</ListItemIcon>
+						<ListItemText>About</ListItemText>
 					</ListItemButton>
 				</ListItem>
 			</List>
