@@ -22,7 +22,7 @@ const columns = [
 ]
 
 const formatDate = (dateString: string) => {
-	const date = new Date(dateString + " UTC")
+	const date = new Date(dateString.slice(0, 19).replace(/ /g, "T") + "+00:00")
 	return date.toLocaleString()
 }
 

@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request, Response, status
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import query_manager
 import requests
@@ -58,9 +58,9 @@ async def platform_daily_line():
     r3 = requests.get(
         "https://api.flipsidecrypto.com/api/v2/queries/dd9c5300-0f52-4bab-a33a-cca69ea90a56/data/latest"
     ).json()
-    all_time = helpers.formatLineChart(r1)
-    thirty = helpers.formatLineChart(r2)
-    seven = helpers.formatLineChart(r3)
+    all_time = helpers.formatLineChart(r1, "PLATFORM")
+    thirty = helpers.formatLineChart(r2, "PLATFORM")
+    seven = helpers.formatLineChart(r3, "PLATFORM")
     return {"all_time": all_time, "thirty": thirty, "seven": seven}
 
 
@@ -75,9 +75,9 @@ async def platform_daily_bump():
     r3 = requests.get(
         "https://api.flipsidecrypto.com/api/v2/queries/dd9c5300-0f52-4bab-a33a-cca69ea90a56/data/latest"
     ).json()
-    all_time = helpers.formatBumpChart(r1, 60)
-    thirty = helpers.formatBumpChart(r2, 3)
-    seven = helpers.formatBumpChart(r3, 1)
+    all_time = helpers.formatBumpChart(r1, 60, "platform")
+    thirty = helpers.formatBumpChart(r2, 3, "platform")
+    seven = helpers.formatBumpChart(r3, 1, "platform")
     return {"all_time": all_time, "thirty": thirty, "seven": seven}
 
 
@@ -95,6 +95,57 @@ async def platform_pie():
         "https://api.flipsidecrypto.com/api/v2/queries/c4a712cd-9e14-44e8-a380-13b8c1c51f12/data/latest"
     )
     return helpers.platformPie(r.json())
+
+
+# Asset
+@app.get("/asset/daily_line")
+async def asset_daily_line():
+    r1 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/59e5035d-206c-4626-9751-efa743e62290/data/latest"
+    ).json()
+    r2 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/763e0a93-d960-45e8-9d08-b39cbcd52c89/data/latest"
+    ).json()
+    r3 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/ac571dc6-c54f-4116-a44a-5bc57752153a/data/latest"
+    ).json()
+    all_time = helpers.formatLineChart(r1, "ASSET")
+    thirty = helpers.formatLineChart(r2, "ASSET")
+    seven = helpers.formatLineChart(r3, "ASSET")
+    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+
+
+@app.get("/asset/daily_bump")
+async def asset_daily_bump():
+    r1 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/59e5035d-206c-4626-9751-efa743e62290/data/latest"
+    ).json()
+    r2 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/763e0a93-d960-45e8-9d08-b39cbcd52c89/data/latest"
+    ).json()
+    r3 = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/ac571dc6-c54f-4116-a44a-5bc57752153a/data/latest"
+    ).json()
+    all_time = helpers.formatBumpChart(r1, 60, "ASSET")
+    thirty = helpers.formatBumpChart(r2, 3, "ASSET")
+    seven = helpers.formatBumpChart(r3, 1, "ASSET")
+    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+
+
+@app.get("/asset/pie")
+async def platform_pie():
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/807a5e50-3cb1-41f4-871b-f892f576851f/data/latest"
+    )
+    return helpers.assetPie(r.json())
+
+
+@app.get("/asset/flows")
+async def asset_flows():
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/9595dd35-485d-45d8-a27e-c12104e56b45/data/latest"
+    )
+    return {"data": helpers.assetChord(r.json())}
 
 
 @app.get("/")

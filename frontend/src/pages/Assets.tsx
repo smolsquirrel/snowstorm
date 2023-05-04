@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 
+import InfoIcon from "@mui/icons-material/Info"
 import Box from "@mui/material/Box"
 import Grid from "@mui/material/Grid"
 import Paper from "@mui/material/Paper"
+import Tooltip from "@mui/material/Tooltip"
 import Typography from "@mui/material/Typography"
 
 import Bump from "../components/Bump"
@@ -29,7 +31,7 @@ interface LineChartDataPoint {
 	y: number
 }
 
-function Platforms() {
+function Assets() {
 	const [statType, setStatType] = useState("VOLUME" as keyof DailyStats)
 	const [data, setData] = useState<Data>({ thirty: { VOLUME: [] } })
 	const [bump, setBump] = useState<Data>({ thirty: { VOLUME: [] } })
@@ -59,25 +61,25 @@ function Platforms() {
 	const [interval, setInterval] = useState("thirty")
 
 	useEffect(() => {
-		fetch(api_url + "/platform/daily_line")
+		fetch(api_url + "/asset/daily_line")
 			.then((r) => r.json())
 			.then((d) => {
 				setData(d)
 				setSelectedData(d[interval][statType])
 			})
-		fetch(api_url + "/platform/daily_bump")
+		fetch(api_url + "/asset/daily_bump")
 			.then((r) => r.json())
 			.then((d) => {
 				setBump(d)
 				setSelectedBump(d[interval][statType])
 			})
-		fetch(api_url + "/platform/overlap")
+		fetch(api_url + "/asset/flows")
 			.then((r) => r.json())
 			.then((d) => {
 				setChord(d["data"])
 			})
 
-		fetch(api_url + "/platform/pie")
+		fetch(api_url + "/asset/pie")
 			.then((r) => r.json())
 			.then((d) => {
 				setPie(d)
@@ -107,7 +109,7 @@ function Platforms() {
 					p={2}
 					sx={{ borderTop: 10, borderColor: "#ee5253" }}
 				>
-					<Typography variant="h3">Platforms</Typography>
+					<Typography variant="h3">Assets</Typography>
 				</Box>
 			</Grid>
 			<Grid item>
@@ -129,7 +131,9 @@ function Platforms() {
 			</Grid>
 			<Grid item>
 				<OptionsBar
-					text={"Ranking by " + statType.charAt(0) + statType.slice(1).toLowerCase()}
+					text={
+						"Daily Ranking by " + statType.charAt(0) + statType.slice(1).toLowerCase()
+					}
 					statType={statType}
 					interval={interval}
 					handleStat={handleStat}
@@ -137,7 +141,7 @@ function Platforms() {
 				/>
 			</Grid>
 			<Grid item>
-				<Box component={Paper} sx={{ height: "50vh" }}>
+				<Box component={Paper} sx={{ height: "60vh" }}>
 					<Bump data={selectedBump} />
 				</Box>
 			</Grid>
@@ -159,6 +163,9 @@ function Platforms() {
 					<Grid item>
 						<Box component={Paper} sx={{ height: "60vh" }}>
 							<Pie data={pie} interval={interval} statType={statType} />
+							<Typography variant="subtitle2">
+								* distribution among top 10 assets
+							</Typography>
 						</Box>
 					</Grid>
 				</Grid>
@@ -171,7 +178,10 @@ function Platforms() {
 							p={2.4}
 							sx={{ borderTop: 10, borderColor: "#ee5253" }}
 						>
-							<Typography variant="h4">User Overlap (7D)</Typography>
+							<Typography variant="h4">Asset Flows (7D)</Typography>
+							<Tooltip title="The width of each band represents the volume flowing from the selected asset to other assets. For example, the width of the WAVAX-USDC band on the WAVAX side represents the volume of WAVAX being swapped to USDC.">
+								<InfoIcon />
+							</Tooltip>
 						</Box>
 					</Grid>
 					<Grid item>
@@ -186,4 +196,4 @@ function Platforms() {
 	)
 }
 
-export default Platforms
+export default Assets

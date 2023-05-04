@@ -1,11 +1,15 @@
 from shroomdk import ShroomDK
 import queries
+from dotenv import load_dotenv
 
-sdk = ShroomDK("a6eea43b-7f22-445f-9d00-53fe76a7d4cf")
+load_dotenv()
+import os
+
+sdk = ShroomDK(os.environ.get("API_KEY"))
 
 
 def execute(query, args):
-    return sdk.query(query.format(*args), cached=False).records
+    return sdk.query(query.format(*args)).records
 
 
 def top_platforms(delta):

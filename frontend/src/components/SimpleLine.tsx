@@ -21,7 +21,7 @@ function SimpleLine({ data, type }: Props) {
 		<ResponsiveLine
 			data={formatData(data, type)}
 			margin={{ top: 50, right: 50, bottom: 30, left: 50 }}
-			xScale={{ type: "time", format: "%Y-%m-%d" }}
+			xScale={{ type: "time", format: "%Y-%m-%d", useUTC: false }}
 			yScale={{
 				type: "linear",
 				min: 0,

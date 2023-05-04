@@ -90,6 +90,17 @@ function Home() {
 	return (
 		<Grid container direction="column" spacing={2}>
 			<Grid item>
+				<Box
+					component={Paper}
+					display="flex"
+					justifyContent="space-between"
+					p={2}
+					sx={{ borderTop: 10, borderColor: "#ee5253" }}
+				>
+					<Typography variant="h3">Home</Typography>
+				</Box>
+			</Grid>
+			<Grid item>
 				<HomeStats data={stats} />
 			</Grid>
 			<Grid item>

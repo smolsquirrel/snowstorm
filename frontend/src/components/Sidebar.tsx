@@ -64,7 +64,11 @@ function Sidebar() {
 					</ListItemButton>
 				</ListItem>
 				<ListItem disablePadding sx={{ color: "white" }}>
-					<ListItemButton href="/account">
+					<ListItemButton
+						href="https://flipsidecrypto.xyz/0xmimi/snowstorm-avalanche-user-dex-activity-tT9iI4"
+						target="_blank"
+						rel="noreferrer"
+					>
 						<ListItemIcon>
 							<AccountCircleIcon sx={{ color: "white" }} />
 						</ListItemIcon>

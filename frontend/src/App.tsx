@@ -1,12 +1,11 @@
 import "./App.css"
 
-import { useState } from "react"
 import { Route, Routes } from "react-router-dom"
 
 import Box from "@mui/material/Box"
-import Container from "@mui/material/Container"
 
 import Sidebar from "./components/Sidebar"
+import Assets from "./pages/Assets"
 import Home from "./pages/Home"
 import Platforms from "./pages/Platforms"
 
@@ -18,6 +17,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/platforms" element={<Platforms />} />
+				<Route path="/assets" element={<Assets />} />
 			</Routes>
 		</Box>
 	)
