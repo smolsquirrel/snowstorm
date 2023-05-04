@@ -171,6 +171,12 @@ function Assets() {
 				<Box component={Paper} sx={{ height: "60vh" }}>
 					<Bump data={selectedBump} />
 				</Box>
+				<Typography variant="subtitle1" sx={{ fontSize: 12 }}>
+					*Although it may appear that two lines are sharing the same rank on the earlier
+					dates, it is simply because of one of the lines is being extended to the
+					beginning. This is only a visual bump, not an actual conflict. Refer to the
+					points to see where each lines ranking properly starts.
+				</Typography>
 			</Grid>
 			<Grid item container>
 				<Grid item container direction="column" xs={6}>
@@ -228,7 +234,7 @@ function Assets() {
 						sx={{ borderTop: 10, borderColor: "#ee5253" }}
 					>
 						<Typography variant="h4">Asset Volume Change by Platform (7D)</Typography>
-						<Tooltip title="Percent change in volume between the past week (the last 7 days) and the week before that.">
+						<Tooltip title="Percent change in volume between the past week (the last 7 days) and the week before that. Considers the top 10 assets of the past week.">
 							<InfoIcon />
 						</Tooltip>
 					</Box>

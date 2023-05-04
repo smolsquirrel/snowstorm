@@ -140,6 +140,12 @@ function Platforms() {
 				<Box component={Paper} sx={{ height: "50vh" }}>
 					<Bump data={selectedBump} />
 				</Box>
+				<Typography variant="subtitle1" sx={{ fontSize: 12 }}>
+					*Although it may appear that two lines are sharing the same rank on the earlier
+					dates, it is simply because of one of the lines is being extended to the
+					beginning. This is only a visual bump, not an actual conflict. Refer to the
+					points to see where each lines ranking properly starts.
+				</Typography>
 			</Grid>
 			<Grid item container>
 				<Grid item container direction="column" xs={6}>
