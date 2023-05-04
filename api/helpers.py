@@ -148,7 +148,7 @@ def assetChord(data):
             cur = d[i]
             if cur["TOKEN_IN"] == x and cur["TOKEN_OUT"] == y:
                 i += 1
-                xl.append(cur["VOLUME_IN"] / 10000)
+                xl.append(cur["VOLUME_IN"])
             else:
                 xl.append(0)
         flows.append(xl)
