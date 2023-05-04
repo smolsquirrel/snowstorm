@@ -17,6 +17,7 @@ app.add_middleware(
 # Homepage
 
 
+# General Stats 1D
 @app.get("/general/past_day")
 async def general_past_day():
     r = requests.get(
@@ -25,6 +26,7 @@ async def general_past_day():
     return {"data": r.json()}
 
 
+# General Daily Stats
 @app.get("/general/daily_stats")
 async def general_daily_stats():
     r = requests.get(
@@ -39,6 +41,9 @@ async def general_recent_transactions():
 
 
 # Platform
+
+
+# Platform general stats
 @app.get("/platform/interval_stats")
 async def platform_interval_stats():
     r = requests.get(
@@ -47,6 +52,9 @@ async def platform_interval_stats():
     return {"data": r.json()}
 
 
+# Platform daily all time
+# Platform daily 30D
+# Platform daily 7D
 @app.get("/platform/daily_line")
 async def platform_daily_line():
     r1 = requests.get(
@@ -64,6 +72,9 @@ async def platform_daily_line():
     return {"all_time": all_time, "thirty": thirty, "seven": seven}
 
 
+# Platform daily all time
+# Platform daily 30D
+# Platform daily 7D
 @app.get("/platform/daily_bump")
 async def platform_daily_bump():
     r1 = requests.get(
@@ -81,6 +92,7 @@ async def platform_daily_bump():
     return {"all_time": all_time, "thirty": thirty, "seven": seven}
 
 
+# Platform users 7D
 @app.get("/platform/overlap")
 async def platform_overlap():
     r = requests.get(
@@ -89,6 +101,7 @@ async def platform_overlap():
     return {"data": helpers.platformUserOverlap(r.json())}
 
 
+# Platform general stats
 @app.get("/platform/pie")
 async def platform_pie():
     r = requests.get(
@@ -98,6 +111,11 @@ async def platform_pie():
 
 
 # Asset
+
+
+# Asset daily all time
+# Asset daily 30D
+# Asset daily 7D
 @app.get("/asset/daily_line")
 async def asset_daily_line():
     r1 = requests.get(
@@ -115,6 +133,9 @@ async def asset_daily_line():
     return {"all_time": all_time, "thirty": thirty, "seven": seven}
 
 
+# Asset daily all time
+# Asset daily 30D
+# Asset daily 7D
 @app.get("/asset/daily_bump")
 async def asset_daily_bump():
     r1 = requests.get(
@@ -132,6 +153,7 @@ async def asset_daily_bump():
     return {"all_time": all_time, "thirty": thirty, "seven": seven}
 
 
+# Asset general stats
 @app.get("/asset/pie")
 async def platform_pie():
     r = requests.get(
@@ -140,6 +162,7 @@ async def platform_pie():
     return helpers.assetPie(r.json())
 
 
+# Asset flows
 @app.get("/asset/flows")
 async def asset_flows():
     r = requests.get(
@@ -148,6 +171,7 @@ async def asset_flows():
     return {"data": helpers.assetChord(r.json())}
 
 
+# Asset top gainers weekly
 @app.get("/asset/heat_map")
 async def asset_heat_map():
     r = requests.get(
