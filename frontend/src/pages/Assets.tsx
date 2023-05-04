@@ -247,7 +247,7 @@ function Assets() {
 							p={2.4}
 							sx={{ borderTop: 10, borderColor: "#ee5253" }}
 						>
-							<Typography variant="h4">Percentage of Stablecoin Volume</Typography>
+							<Typography variant="h4">Stablecoin Volume Percentage</Typography>
 						</Box>
 					</Grid>
 					<Grid item>
