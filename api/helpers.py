@@ -153,3 +153,12 @@ def assetChord(data):
                 xl.append(0)
         flows.append(xl)
     return {"labels": assets, "data": flows}
+
+
+def assetHeatMap(data):
+    chart = {}
+    for x in data:
+        if x["PLATFORM"] not in chart:
+            chart[x["PLATFORM"]] = {"id": x["PLATFORM"], "data": []}
+        chart[x["PLATFORM"]]["data"].append({"x": x["ASSET"], "y": x["CHANGE"]})
+    return list(chart.values())

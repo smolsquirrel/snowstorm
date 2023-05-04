@@ -19,6 +19,7 @@
 		"@nivo/calendar": "^0.82.0",
 		"@nivo/chord": "^0.82.1",
 		"@nivo/core": "^0.82.0",
+		"@nivo/heatmap": "^0.82.1",
 		"@nivo/line": "^0.82.0",
 		"@nivo/pie": "^0.82.1",
 		"@types/react-router-dom": "^5.3.3",

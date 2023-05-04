@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography"
 
 import Bump from "../components/Bump"
 import Chord from "../components/Chord"
+import HeatMap from "../components/HeatMap"
 import MultiLine from "../components/MultiLine"
 import OptionsBar from "../components/OptionsBar"
 import Pie from "../components/Pie"
@@ -46,6 +47,7 @@ function Assets() {
 		thirty: { SWAPS: [], USERS: [], VOLUME: [] },
 		seven: { SWAPS: [], USERS: [], VOLUME: [] },
 	})
+	const [heat, setHeat] = useState<{ id: string; data: { x: string; y: number }[] }[]>([])
 	const [selectedData, setSelectedData] = useState<LineChartData[]>([
 		{
 			id: "dummy",
@@ -83,6 +85,11 @@ function Assets() {
 			.then((r) => r.json())
 			.then((d) => {
 				setPie(d)
+			})
+		fetch(api_url + "/asset/heat_map")
+			.then((r) => r.json())
+			.then((d) => {
+				setHeat(d["data"])
 			})
 	}, [])
 
@@ -191,7 +198,27 @@ function Assets() {
 					</Grid>
 				</Grid>
 			</Grid>
-			<Grid item></Grid>
+			<Grid item container direction="column" marginTop={2}>
+				<Grid item>
+					<Box
+						component={Paper}
+						display="flex"
+						justifyContent="space-between"
+						p={2.4}
+						sx={{ borderTop: 10, borderColor: "#ee5253" }}
+					>
+						<Typography variant="h4">Asset Volume Change by Platform (7D)</Typography>
+						<Tooltip title="Percent change in volume between the past week (the last 7 days) and the week before that.">
+							<InfoIcon />
+						</Tooltip>
+					</Box>
+				</Grid>
+				<Grid item>
+					<Box component={Paper} sx={{ height: "60vh" }}>
+						<HeatMap data={heat} />
+					</Box>
+				</Grid>
+			</Grid>
 		</Grid>
 	)
 }

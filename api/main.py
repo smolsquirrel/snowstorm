@@ -148,6 +148,14 @@ async def asset_flows():
     return {"data": helpers.assetChord(r.json())}
 
 
+@app.get("/asset/heat_map")
+async def asset_heat_map():
+    r = requests.get(
+        "https://api.flipsidecrypto.com/api/v2/queries/445117ed-fc2d-4f85-a5d5-bb5097ca94d8/data/latest"
+    )
+    return {"data": helpers.assetHeatMap(r.json())}
+
+
 @app.get("/")
 async def root():
     return {}
