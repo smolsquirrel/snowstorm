@@ -1,4 +1,4 @@
-import { ResponsivePie } from "@nivo/Pie"
+import { ResponsivePie } from "@nivo/pie"
 
 interface Props {
 	data: {
