@@ -42,6 +42,7 @@ const applyDateRange = (range: number[], lineData: Array<any>) => {
 }
 
 function Pools() {
+	const [numLoaded, setNumLoaded] = useState(0)
 	const [statType, setStatType] = useState("VOLUME" as keyof DailyStats)
 	const [data, setData] = useState<Data>({ thirty: { VOLUME: [] } })
 	const [wavax, setWavax] = useState<{ x: string; y: number }[]>([])
@@ -53,7 +54,6 @@ function Pools() {
 	const [pie, setPie] = useState<{
 		[keys: string]: { [keys: string]: { id: string; label: string; value: number }[] }
 	}>({
-		all_time: { SWAPS: [], USERS: [], VOLUME: [] },
 		thirty: { SWAPS: [], USERS: [], VOLUME: [] },
 		seven: { SWAPS: [], USERS: [], VOLUME: [] },
 	})
@@ -79,33 +79,39 @@ function Pools() {
 			.then((d) => {
 				setData(d)
 				setSelectedData(d[interval][statType])
+				setNumLoaded((prevState) => prevState + 1)
 			})
 		fetch(api_url + "/pool/daily_bump")
 			.then((r) => r.json())
 			.then((d) => {
 				setBump(d)
 				setSelectedBump(d[interval][statType])
+				setNumLoaded((prevState) => prevState + 1)
 			})
 		fetch(api_url + "/pool/overlap")
 			.then((r) => r.json())
 			.then((d) => {
 				setChord(d["data"])
+				setNumLoaded((prevState) => prevState + 1)
 			})
 
 		fetch(api_url + "/pool/pie")
 			.then((r) => r.json())
 			.then((d) => {
 				setPie(d)
+				setNumLoaded((prevState) => prevState + 1)
 			})
 		fetch(api_url + "/pool/heat_map")
 			.then((r) => r.json())
 			.then((d) => {
 				setHeat(d["data"])
+				setNumLoaded((prevState) => prevState + 1)
 			})
 		fetch(api_url + "/pool/wavax_line")
 			.then((r) => r.json())
 			.then((d) => {
 				setWavax(d["data"])
+				setNumLoaded((prevState) => prevState + 1)
 			})
 	}, [])
 
@@ -146,6 +152,7 @@ function Pools() {
 					interval={interval}
 					handleStat={handleStat}
 					handleInterval={handleInterval}
+					disable={numLoaded < 6}
 				/>
 			</Grid>
 			<Grid item>
@@ -165,6 +172,7 @@ function Pools() {
 					interval={interval}
 					handleStat={handleStat}
 					handleInterval={handleInterval}
+					disable={numLoaded < 6}
 				/>
 			</Grid>
 			<Grid item>
@@ -191,6 +199,7 @@ function Pools() {
 							interval={interval}
 							handleStat={handleStat}
 							handleInterval={handleInterval}
+							disable={numLoaded < 6}
 						/>
 					</Grid>
 					<Grid item>

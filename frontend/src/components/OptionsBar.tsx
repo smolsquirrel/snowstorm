@@ -11,9 +11,10 @@ interface Props {
 	interval: string
 	handleInterval: (event: React.MouseEvent<any>, value: any) => void
 	handleStat: (event: React.MouseEvent<any>, value: any) => void
+	disable: boolean
 }
 
-function OptionsBar({ text, statType, interval, handleInterval, handleStat }: Props) {
+function OptionsBar({ text, statType, interval, handleInterval, handleStat, disable }: Props) {
 	return (
 		<Box
 			component={Paper}
@@ -25,25 +26,22 @@ function OptionsBar({ text, statType, interval, handleInterval, handleStat }: Pr
 			<Typography variant="h4">{text}</Typography>
 			<Box display="flex">
 				<ToggleButtonGroup exclusive value={interval} onChange={handleInterval}>
-					<ToggleButton value="all_time" disabled={interval === "all_time"}>
-						all time
-					</ToggleButton>
-					<ToggleButton value="thirty" disabled={interval === "thirty"}>
+					<ToggleButton value="thirty" disabled={interval === "thirty" || disable}>
 						30D
 					</ToggleButton>
-					<ToggleButton value="seven" disabled={interval === "seven"}>
+					<ToggleButton value="seven" disabled={interval === "seven" || disable}>
 						7D
 					</ToggleButton>
 				</ToggleButtonGroup>
 				<Divider orientation="vertical" sx={{ ml: 1, mr: 1 }} />
 				<ToggleButtonGroup exclusive value={statType} onChange={handleStat}>
-					<ToggleButton value="VOLUME" disabled={statType === "VOLUME"}>
+					<ToggleButton value="VOLUME" disabled={statType === "VOLUME" || disable}>
 						Volume
 					</ToggleButton>
-					<ToggleButton value="USERS" disabled={statType === "USERS"}>
+					<ToggleButton value="USERS" disabled={statType === "USERS" || disable}>
 						Users
 					</ToggleButton>
-					<ToggleButton value="SWAPS" disabled={statType === "SWAPS"}>
+					<ToggleButton value="SWAPS" disabled={statType === "SWAPS" || disable}>
 						Swaps
 					</ToggleButton>
 				</ToggleButtonGroup>

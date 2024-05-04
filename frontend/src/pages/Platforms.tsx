@@ -30,6 +30,7 @@ interface LineChartDataPoint {
 }
 
 function Platforms() {
+	const [numLoaded, setNumLoaded] = useState(0)
 	const [statType, setStatType] = useState("VOLUME" as keyof DailyStats)
 	const [data, setData] = useState<Data>({ thirty: { VOLUME: [] } })
 	const [bump, setBump] = useState<Data>({ thirty: { VOLUME: [] } })
@@ -40,7 +41,6 @@ function Platforms() {
 	const [pie, setPie] = useState<{
 		[keys: string]: { [keys: string]: { id: string; label: string; value: number }[] }
 	}>({
-		all_time: { SWAPS: [], USERS: [], VOLUME: [] },
 		thirty: { SWAPS: [], USERS: [], VOLUME: [] },
 		seven: { SWAPS: [], USERS: [], VOLUME: [] },
 	})
@@ -64,23 +64,27 @@ function Platforms() {
 			.then((d) => {
 				setData(d)
 				setSelectedData(d[interval][statType])
+				setNumLoaded((prevState) => prevState + 1)
 			})
 		fetch(api_url + "/platform/daily_bump")
 			.then((r) => r.json())
 			.then((d) => {
 				setBump(d)
 				setSelectedBump(d[interval][statType])
+				setNumLoaded((prevState) => prevState + 1)
 			})
 		fetch(api_url + "/platform/overlap")
 			.then((r) => r.json())
 			.then((d) => {
 				setChord(d["data"])
+				setNumLoaded((prevState) => prevState + 1)
 			})
 
 		fetch(api_url + "/platform/pie")
 			.then((r) => r.json())
 			.then((d) => {
 				setPie(d)
+				setNumLoaded((prevState) => prevState + 1)
 			})
 	}, [])
 
@@ -117,6 +121,7 @@ function Platforms() {
 					interval={interval}
 					handleStat={handleStat}
 					handleInterval={handleInterval}
+					disable={numLoaded < 4}
 				/>
 			</Grid>
 			<Grid item>
@@ -134,6 +139,7 @@ function Platforms() {
 					interval={interval}
 					handleStat={handleStat}
 					handleInterval={handleInterval}
+					disable={numLoaded < 4}
 				/>
 			</Grid>
 			<Grid item>
@@ -160,6 +166,7 @@ function Platforms() {
 							interval={interval}
 							handleStat={handleStat}
 							handleInterval={handleInterval}
+							disable={numLoaded < 4}
 						/>
 					</Grid>
 					<Grid item>
