@@ -14,6 +14,9 @@ function HeatMap({ data }: Props) {
 				tickPadding: 5,
 				tickRotation: 0,
 				legend: "",
+				format: (v) => {
+					return v.length > 10 ? v.substring(0, 10) + "..." : v
+				},
 			}}
 			axisRight={{
 				tickSize: 7,
