@@ -33,20 +33,6 @@ function Chord({ labels, data }: Props) {
 			labelOffset={5}
 			colors={{ scheme: "category10" }}
 			motionConfig="stiff"
-			legends={[
-				{
-					anchor: "left",
-					direction: "column",
-					justify: false,
-					translateX: -20,
-					translateY: 0,
-					itemWidth: 100,
-					itemHeight: 20,
-					itemsSpacing: 0,
-					symbolSize: 20,
-					itemDirection: "left-to-right",
-				},
-			]}
 		/>
 	)
 }

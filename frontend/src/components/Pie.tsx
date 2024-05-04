@@ -19,7 +19,7 @@ function Pie({ data, statType, interval }: Props) {
 			data={d}
 			valueFormat={formatterCompact.format}
 			colors={{ scheme: "category10" }}
-			margin={{ top: 40, right: 90, bottom: 80, left: 90 }}
+			margin={{ top: 40, right: 90, bottom: 40, left: 90 }}
 			innerRadius={0.5}
 			padAngle={0.7}
 			cornerRadius={3}
@@ -31,35 +31,11 @@ function Pie({ data, statType, interval }: Props) {
 			}}
 			arcLinkLabelsTextColor="#333333"
 			arcLinkLabelsThickness={2}
+			arcLinkLabelsSkipAngle={3}
 			arcLinkLabelsColor={{ from: "color" }}
 			arcLinkLabelsDiagonalLength={10}
 			arcLinkLabelsStraightLength={30}
 			arcLabelsSkipAngle={10}
-			legends={[
-				{
-					anchor: "bottom",
-					direction: "row",
-					justify: false,
-					translateX: 0,
-					translateY: 30,
-					itemsSpacing: 0,
-					itemWidth: 65,
-					itemHeight: 0,
-					itemTextColor: "#999",
-					itemDirection: "top-to-bottom",
-					itemOpacity: 1,
-					symbolSize: 5,
-					symbolShape: "circle",
-					effects: [
-						{
-							on: "hover",
-							style: {
-								itemTextColor: "#000",
-							},
-						},
-					],
-				},
-			]}
 		/>
 	)
 }
