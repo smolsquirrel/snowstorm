@@ -5,7 +5,7 @@ function About() {
 	return (
 		<Container>
 			<Typography variant="body1" textAlign="justify">
-				All of the data is sourced from avalanche.core.ez_dex_swaps on Flipside. However,
+				All of the data is sourced from avalanche.defi.ez_dex_swaps on Flipside. However,
 				due to the limitations of the API's free tier query seconds, it was not feasible to
 				obtain the required data through the API. To work around this, I wrote the queries
 				directly on Flipside, scheduled them to refresh every 3 hours, and used the
@@ -63,16 +63,6 @@ function About() {
 					rel="noopener noreferrer"
 				>
 					https://flipsidecrypto.xyz/0xmimi/snowstorm-tables-and-queries-1XMA6X
-				</a>
-			</Typography>
-			<Typography variant="body1" textAlign="justify">
-				Twitter:
-				<a
-					href="https://twitter.com/MimiTheSquirrel"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					https://twitter.com/MimiTheSquirrel
 				</a>
 			</Typography>
 		</Container>
