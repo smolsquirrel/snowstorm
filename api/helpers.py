@@ -52,7 +52,12 @@ def formatBumpChart(data, interval, key):
             prev_date = x["DATE"][:10]
             c += 1
         if c % interval == 0:
-            lv.append({key: x[key.upper()], "value": x["VOLUME"]})
+            lv.append(
+                {
+                    key: x[key.upper()],
+                    "value": x["VOLUME"] if x["VOLUME"] != None else 0,
+                }
+            )
             ls.append({key: x[key.upper()], "value": x["SWAPS"]})
             lu.append({key: x[key.upper()], "value": x["USERS"]})
     lineData["VOLUME"] = list(volume.values())
