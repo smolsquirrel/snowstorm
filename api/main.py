@@ -10,6 +10,9 @@ origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -66,10 +69,9 @@ async def platform_daily_line():
     r3 = requests.get(
         "https://flipsidecrypto.xyz/api/v1/queries/c2117e80-0008-4b68-be30-6e2e74c3e136/data/latest"
     ).json()
-    all_time = helpers.formatLineChart(r1, "PLATFORM")
     thirty = helpers.formatLineChart(r2, "PLATFORM")
     seven = helpers.formatLineChart(r3, "PLATFORM")
-    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+    return {"thirty": thirty, "seven": seven}
 
 
 # Platform daily all time
@@ -85,7 +87,7 @@ async def platform_daily_bump():
     ).json()
     thirty = helpers.formatBumpChart(r2, 3, "platform")
     seven = helpers.formatBumpChart(r3, 1, "platform")
-    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+    return {"thirty": thirty, "seven": seven}
 
 
 # Platform users 7D
@@ -122,7 +124,7 @@ async def asset_daily_line():
     ).json()
     thirty = helpers.formatLineChart(r2, "ASSET")
     seven = helpers.formatLineChart(r3, "ASSET")
-    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+    return {"thirty": thirty, "seven": seven}
 
 
 # Asset daily all time
@@ -138,7 +140,7 @@ async def asset_daily_bump():
     ).json()
     thirty = helpers.formatBumpChart(r2, 3, "ASSET")
     seven = helpers.formatBumpChart(r3, 1, "ASSET")
-    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+    return {"thirty": thirty, "seven": seven}
 
 
 # Asset general stats
@@ -197,7 +199,7 @@ async def pool_daily_line():
     ).json()
     thirty = helpers.formatLineChart(r2, "POOL")
     seven = helpers.formatLineChart(r3, "POOL")
-    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+    return {"thirty": thirty, "seven": seven}
 
 
 # Pool daily all time
@@ -213,7 +215,7 @@ async def pool_daily_bump():
     ).json()
     thirty = helpers.formatBumpChart(r2, 3, "POOL")
     seven = helpers.formatBumpChart(r3, 1, "POOL")
-    return {"all_time": all_time, "thirty": thirty, "seven": seven}
+    return {"thirty": thirty, "seven": seven}
 
 
 # Pool general stats
