@@ -19,7 +19,7 @@ function Pie({ data, statType, interval }: Props) {
 			data={d}
 			valueFormat={formatterCompact.format}
 			colors={{ scheme: "category10" }}
-			margin={{ top: 40, right: 90, bottom: 40, left: 90 }}
+			margin={{ top: 60, right: 90, bottom: 60, left: 60 }}
 			innerRadius={0.5}
 			padAngle={0.7}
 			cornerRadius={3}

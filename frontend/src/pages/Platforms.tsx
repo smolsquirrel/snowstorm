@@ -114,47 +114,53 @@ function Platforms() {
 					<Typography variant="h3">Platforms</Typography>
 				</Box>
 			</Grid>
-			<Grid item>
-				<OptionsBar
-					text={"Daily " + statType.charAt(0) + statType.slice(1).toLowerCase()}
-					statType={statType}
-					interval={interval}
-					handleStat={handleStat}
-					handleInterval={handleInterval}
-					disable={numLoaded < 4}
-				/>
-			</Grid>
-			<Grid item>
-				<Box component={Paper} sx={{ height: "50vh" }}>
-					<MultiLine
-						data={selectedData}
-						interval={interval === "all_time" ? "month" : "day"}
+			<Grid item container direction="column">
+				<Grid item>
+					<OptionsBar
+						text={"Daily " + statType.charAt(0) + statType.slice(1).toLowerCase()}
+						statType={statType}
+						interval={interval}
+						handleStat={handleStat}
+						handleInterval={handleInterval}
+						disable={numLoaded < 4}
 					/>
-				</Box>
+				</Grid>
+				<Grid item>
+					<Box component={Paper} sx={{ height: "50vh" }}>
+						<MultiLine
+							data={selectedData}
+							interval={interval === "all_time" ? "month" : "day"}
+						/>
+					</Box>
+				</Grid>
 			</Grid>
-			<Grid item>
-				<OptionsBar
-					text={"Ranking by " + statType.charAt(0) + statType.slice(1).toLowerCase()}
-					statType={statType}
-					interval={interval}
-					handleStat={handleStat}
-					handleInterval={handleInterval}
-					disable={numLoaded < 4}
-				/>
+
+			<Grid item container direction="column">
+				<Grid item>
+					<OptionsBar
+						text={"Ranking by " + statType.charAt(0) + statType.slice(1).toLowerCase()}
+						statType={statType}
+						interval={interval}
+						handleStat={handleStat}
+						handleInterval={handleInterval}
+						disable={numLoaded < 4}
+					/>
+				</Grid>
+				<Grid item>
+					<Box component={Paper} sx={{ height: "50vh" }}>
+						<Bump data={selectedBump} />
+					</Box>
+					<Typography variant="subtitle1" sx={{ fontSize: 12 }}>
+						*Although it may appear that two lines are sharing the same rank on the
+						earlier dates, it is simply because of one of the lines is being extended to
+						the beginning. This is only a visual bump, not an actual conflict. Refer to
+						the points to see where each lines ranking properly starts.
+					</Typography>
+				</Grid>
 			</Grid>
-			<Grid item>
-				<Box component={Paper} sx={{ height: "50vh" }}>
-					<Bump data={selectedBump} />
-				</Box>
-				<Typography variant="subtitle1" sx={{ fontSize: 12 }}>
-					*Although it may appear that two lines are sharing the same rank on the earlier
-					dates, it is simply because of one of the lines is being extended to the
-					beginning. This is only a visual bump, not an actual conflict. Refer to the
-					points to see where each lines ranking properly starts.
-				</Typography>
-			</Grid>
+
 			<Grid item container>
-				<Grid item container direction="column" xs={6}>
+				<Grid item container direction="column" xl={6} lg={12}>
 					<Grid item>
 						<OptionsBar
 							text={
@@ -175,7 +181,7 @@ function Platforms() {
 						</Box>
 					</Grid>
 				</Grid>
-				<Grid item container direction="column" xs={6}>
+				<Grid item container direction="column" xl={6} lg={12}>
 					<Grid item>
 						<Box
 							component={Paper}

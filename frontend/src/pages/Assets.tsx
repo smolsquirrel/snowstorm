@@ -116,8 +116,6 @@ function Assets() {
 	}, [])
 
 	useEffect(() => {
-		console.log(data)
-		console.log(bump)
 		setSelectedData(data[interval][statType])
 		setSelectedBump(bump[interval][statType])
 	}, [statType, interval])
@@ -135,7 +133,7 @@ function Assets() {
 	}
 
 	return (
-		<Grid container direction="column" spacing={2}>
+		<Grid container direction="column" spacing={2} sx={{ width: "100%" }}>
 			<Grid item>
 				<Box
 					component={Paper}
@@ -147,49 +145,57 @@ function Assets() {
 					<Typography variant="h3">Assets</Typography>
 				</Box>
 			</Grid>
-			<Grid item>
-				<OptionsBar
-					text={"Daily " + statType.charAt(0) + statType.slice(1).toLowerCase()}
-					statType={statType}
-					interval={interval}
-					handleStat={handleStat}
-					handleInterval={handleInterval}
-					disable={numLoaded < 6}
-				/>
-			</Grid>
-			<Grid item>
-				<Box component={Paper} sx={{ height: "50vh" }}>
-					<MultiLine
-						data={selectedData}
-						interval={interval === "all_time" ? "month" : "day"}
+			<Grid item container direction="column">
+				<Grid item>
+					<OptionsBar
+						text={"Daily " + statType.charAt(0) + statType.slice(1).toLowerCase()}
+						statType={statType}
+						interval={interval}
+						handleStat={handleStat}
+						handleInterval={handleInterval}
+						disable={numLoaded < 6}
 					/>
-				</Box>
+				</Grid>
+				<Grid item>
+					<Box component={Paper} sx={{ height: "50vh" }}>
+						<MultiLine
+							data={selectedData}
+							interval={interval === "all_time" ? "month" : "day"}
+						/>
+					</Box>
+				</Grid>
 			</Grid>
-			<Grid item>
-				<OptionsBar
-					text={
-						"Daily Ranking by " + statType.charAt(0) + statType.slice(1).toLowerCase()
-					}
-					statType={statType}
-					interval={interval}
-					handleStat={handleStat}
-					handleInterval={handleInterval}
-					disable={numLoaded < 6}
-				/>
+
+			<Grid item container direction="column">
+				<Grid item>
+					<OptionsBar
+						text={
+							"Daily Ranking by " +
+							statType.charAt(0) +
+							statType.slice(1).toLowerCase()
+						}
+						statType={statType}
+						interval={interval}
+						handleStat={handleStat}
+						handleInterval={handleInterval}
+						disable={numLoaded < 6}
+					/>
+				</Grid>
+				<Grid item>
+					<Box component={Paper} sx={{ height: "60vh" }}>
+						<Bump data={selectedBump} />
+					</Box>
+					<Typography variant="subtitle1" sx={{ fontSize: 12 }}>
+						*Although it may appear that two lines are sharing the same rank on the
+						earlier dates, it is simply because of one of the lines is being extended to
+						the beginning. This is only a visual bump, not an actual conflict. Refer to
+						the points to see where each lines ranking properly starts.
+					</Typography>
+				</Grid>
 			</Grid>
-			<Grid item>
-				<Box component={Paper} sx={{ height: "60vh" }}>
-					<Bump data={selectedBump} />
-				</Box>
-				<Typography variant="subtitle1" sx={{ fontSize: 12 }}>
-					*Although it may appear that two lines are sharing the same rank on the earlier
-					dates, it is simply because of one of the lines is being extended to the
-					beginning. This is only a visual bump, not an actual conflict. Refer to the
-					points to see where each lines ranking properly starts.
-				</Typography>
-			</Grid>
+
 			<Grid item container>
-				<Grid item container direction="column" xs={6}>
+				<Grid item container direction="column" xl={6} lg={12}>
 					<Grid item>
 						<OptionsBar
 							text={
@@ -213,7 +219,7 @@ function Assets() {
 						</Box>
 					</Grid>
 				</Grid>
-				<Grid item container direction="column" xs={6}>
+				<Grid item container direction="column" xl={6} lg={12}>
 					<Grid item>
 						<Box
 							component={Paper}
