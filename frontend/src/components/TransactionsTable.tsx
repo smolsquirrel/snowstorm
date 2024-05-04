@@ -49,7 +49,9 @@ function TransactionsTable({ data }: Props) {
 							<TableCell>{tx.USER.slice(0, 5) + "..." + tx.USER.slice(37)}</TableCell>
 							<TableCell>
 								<Link
-									href={"https://snowtrace.io/tx/" + tx.TX_HASH}
+									href={
+										"https://snowtrace.io/tx/" + tx.TX_HASH + "?chainId=43114"
+									}
 									target="_blank"
 									rel="noreferrer"
 								>
