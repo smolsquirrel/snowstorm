@@ -40,6 +40,14 @@ function Sidebar() {
 					</ListItemButton>
 				</ListItem>
 				<ListItem disablePadding sx={{ color: "white" }}>
+					<ListItemButton href="/assets">
+						<ListItemIcon>
+							<MonetizationOnIcon sx={{ color: "white" }} />
+						</ListItemIcon>
+						<ListItemText>Assets</ListItemText>
+					</ListItemButton>
+				</ListItem>
+				<ListItem disablePadding sx={{ color: "white" }}>
 					<ListItemButton href="/platforms">
 						<ListItemIcon>
 							<StoreIcon sx={{ color: "white" }} />
@@ -55,14 +63,7 @@ function Sidebar() {
 						<ListItemText>Pools</ListItemText>
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding sx={{ color: "white" }}>
-					<ListItemButton href="/assets">
-						<ListItemIcon>
-							<MonetizationOnIcon sx={{ color: "white" }} />
-						</ListItemIcon>
-						<ListItemText>Assets</ListItemText>
-					</ListItemButton>
-				</ListItem>
+
 				<ListItem disablePadding sx={{ color: "white" }}>
 					<ListItemButton href="/about">
 						<ListItemIcon>
