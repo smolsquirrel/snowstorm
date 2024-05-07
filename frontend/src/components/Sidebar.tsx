@@ -1,4 +1,3 @@
-import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 import HomeIcon from "@mui/icons-material/Home"
 import InfoIcon from "@mui/icons-material/Info"
 import InventoryIcon from "@mui/icons-material/Inventory"
@@ -62,18 +61,6 @@ function Sidebar() {
 							<MonetizationOnIcon sx={{ color: "white" }} />
 						</ListItemIcon>
 						<ListItemText>Assets</ListItemText>
-					</ListItemButton>
-				</ListItem>
-				<ListItem disablePadding sx={{ color: "white" }}>
-					<ListItemButton
-						href="https://flipsidecrypto.xyz/0xmimi/snowstorm-avalanche-user-dex-activity-tT9iI4"
-						target="_blank"
-						rel="noreferrer"
-					>
-						<ListItemIcon>
-							<AccountCircleIcon sx={{ color: "white" }} />
-						</ListItemIcon>
-						<ListItemText>Account</ListItemText>
 					</ListItemButton>
 				</ListItem>
 				<ListItem disablePadding sx={{ color: "white" }}>
